@@ -2,7 +2,7 @@ const rockBtn = document.getElementById('rock');
 const paperBtn = document.getElementById('paper');
 const scissorsBtn = document.getElementById('scissors');
 
-const computerOptions = ['rock','paper','scissors'];
+const options = ['rock','paper','scissors'];
 
 let playerScore = 0;
 let computerScore = 0;
@@ -10,72 +10,70 @@ let drawScore = 0;
 
 let playerChoice;
 let computerChoice;
+let winState;
 
 function computerNumber(){
-    let randomNumber = Math.floor(Math.random() * 3);
-    return computerOptions[randomNumber];
+    return Math.floor(Math.random() * 3) + 1;
 }
 
-function score(){
-    if(playerChoice === computerChoice){
-        console.log("draw");
-    }
-    else if(playerChoice == 'rock'){
-        if(computerChoice == 'paper'){
-            computerScore++;
-            // computer.innerHTML = computer_score;
-            console.log("computer wins " + computerScore);
+function printScore(){
+    console.log("Player score: " + playerScore);
+    console.log("Computer score: " + computerScore);
+    console.log("Draw score: " + drawScore);
+    console.log(" ");
+}
 
-        }else{
-            playerScore++;
-            // player.innerHTML = player_score;
-            console.log("player wins " + playerScore);
-        }
+function game(){
+    if (computerChoice === playerChoice) {
+        drawScore++;
+        winState = "Draw! ";
+    } 
+    else if (computerChoice == 2 && playerChoice == 1) {
+        computerScore++;
+        winState = "Computer win! ";
+    } 
+    else if (computerChoice == 1 && playerChoice == 3) {
+        computerScore++;
+        winState = "Computer win! ";
     }
-    else if(playerChoice == 'scissors'){
-        if(computerChoice == 'rock'){
-            computerScore++;
-            // computer.innerHTML = computer_score;
-            console.log("computer wins " + computerScore);
-        }else{
-            playerScore++;
-            // player.innerHTML = player_score;
-            console.log("player wins " + playerScore);
-        }
+    else if (computerChoice == 3 && playerChoice == 2) {
+        computerScore++;
+        winState = "Computer win! ";
     }
-    else if(playerChoice == 'paper'){
-        if(computerChoice == 'scissors'){
-            computerScore++;
-            // computer.innerHTML = computer_score;;
-            console.log("computer wins " + computerScore);
-
-        }else{
-            playerScore++;
-            // player.innerHTML = player_score;
-            console.log("player wins " + playerScore);
-        }
+    else {
+        playerScore++;
+        winState = "Player win! ";
     }
 }
 
 function rockEvent(){
-    playerChoice = 'rock';
+    playerChoice = 1;
     computerChoice = computerNumber();
-    console.log("Computer choice: " + computerChoice)
-    score();
+    console.log("Player choice: " + options[playerChoice - 1]);
+    console.log("Computer choice: " + options[computerChoice - 1]);
+    game();
+    console.log(winState);
+    printScore();
 }
 
 function paperEvent(){
-    playerChoice = 'paper';
+    playerChoice = 2;
     computerChoice = computerNumber();
-    console.log("Computer choice: " + computerChoice)
-    score();
+    console.log("Player choice: " + options[playerChoice - 1]);
+    console.log("Computer choice: " + options[computerChoice - 1]);
+    game();
+    console.log(winState);
+    printScore();
 }
 
 function scissorsEvent(){
-    playerChoice = 'scissors';
+    playerChoice = 3;
     computerChoice = computerNumber();
-    console.log("Computer choice: " + computerChoice)
-    score();
+    console.log("Player choice: " + options[playerChoice - 1]);
+    console.log("Computer choice: " + options[computerChoice - 1]);
+    game();
+    console.log(winState);
+    printScore();
 }
 
 rockBtn.addEventListener("click", rockEvent);
