@@ -2,6 +2,11 @@ const rockBtn = document.getElementById('rock');
 const paperBtn = document.getElementById('paper');
 const scissorsBtn = document.getElementById('scissors');
 
+const win_point = document.getElementById("win-p")
+const player_point = document.getElementById("player-p")
+const computer_point = document.getElementById("computer-p")
+const draw_point = document.getElementById("draw-p")
+
 const options = ['rock','paper','scissors'];
 
 let playerScore = 0;
@@ -17,62 +22,52 @@ function computerNumber(){
 }
 
 function printScore(){
-    console.log("Player score: " + playerScore);
-    console.log("Computer score: " + computerScore);
-    console.log("Draw score: " + drawScore);
-    console.log(" ");
+    player_point.innerHTML = playerScore;
+    computer_point.innerHTML = computerScore;
+    draw_point.innerHTML = drawScore;
 }
 
 function game(){
     if (computerChoice === playerChoice) {
         drawScore++;
-        winState = "Draw! ";
+        win_point.innerHTML = "Draw! ";
     } 
     else if (computerChoice == 2 && playerChoice == 1) {
         computerScore++;
-        winState = "Computer win! ";
+        win_point.innerHTML = "Computer choice: " + options[computerChoice - 1] + ", computer win!";
     } 
     else if (computerChoice == 1 && playerChoice == 3) {
         computerScore++;
-        winState = "Computer win! ";
+        win_point.innerHTML = "Computer choice: " + options[computerChoice - 1] + ", computer win!";
     }
     else if (computerChoice == 3 && playerChoice == 2) {
         computerScore++;
-        winState = "Computer win! ";
+        win_point.innerHTML = "Computer choice: " + options[computerChoice - 1] + ", computer win!";
     }
     else {
         playerScore++;
-        winState = "Player win! ";
+        win_point.innerHTML = "Computer choice: " + options[computerChoice - 1] + ", player win!" ;
     }
 }
 
 function rockEvent(){
     playerChoice = 1;
     computerChoice = computerNumber();
-    console.log("Player choice: " + options[playerChoice - 1]);
-    console.log("Computer choice: " + options[computerChoice - 1]);
     game();
-    console.log(winState);
     printScore();
 }
 
 function paperEvent(){
     playerChoice = 2;
     computerChoice = computerNumber();
-    console.log("Player choice: " + options[playerChoice - 1]);
-    console.log("Computer choice: " + options[computerChoice - 1]);
     game();
-    console.log(winState);
     printScore();
 }
 
 function scissorsEvent(){
     playerChoice = 3;
     computerChoice = computerNumber();
-    console.log("Player choice: " + options[playerChoice - 1]);
-    console.log("Computer choice: " + options[computerChoice - 1]);
     game();
-    console.log(winState);
     printScore();
 }
 
